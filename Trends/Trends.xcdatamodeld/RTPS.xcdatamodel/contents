@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Area" representedClassName="Area" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="conferences" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conference" inverseName="area" inverseEntity="Conference"/>
+        <relationship name="paper" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Paper" inverseName="area" inverseEntity="Paper"/>
+    </entity>
+    <entity name="Author" representedClassName="Author" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <relationship name="papersPublished" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Paper" inverseName="authors" inverseEntity="Paper"/>
+    </entity>
+    <entity name="Conference" representedClassName="Conference" syncable="YES" codeGenerationType="class">
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="acceptedPapers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Paper" inverseName="conference" inverseEntity="Paper"/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Area" inverseName="conferences" inverseEntity="Area"/>
+    </entity>
+    <entity name="Journal" representedClassName="Journal" syncable="YES" codeGenerationType="class">
+        <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="acceptedPapers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Paper" inverseName="journal" inverseEntity="Paper"/>
+    </entity>
+    <entity name="Paper" representedClassName="Paper" syncable="YES" codeGenerationType="class">
+        <attribute name="isLiked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="publishDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <attribute name="url" attributeType="String" defaultValueString=""/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Area" inverseName="paper" inverseEntity="Area"/>
+        <relationship name="authors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Author" inverseName="papersPublished" inverseEntity="Author"/>
+        <relationship name="conference" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conference" inverseName="acceptedPapers" inverseEntity="Conference"/>
+        <relationship name="journal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Journal" inverseName="acceptedPapers" inverseEntity="Journal"/>
+    </entity>
+    <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="Data"/>
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SocialAccount" inverseName="posts" inverseEntity="SocialAccount"/>
+    </entity>
+    <entity name="SocialAccount" representedClassName="SocialAccount" syncable="YES" codeGenerationType="class">
+        <attribute name="nickname" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="account" inverseEntity="Post"/>
+    </entity>
+    <elements>
+        <element name="Area" positionX="-296.6185913085938" positionY="58.060302734375" width="128" height="74"/>
+        <element name="Author" positionX="27" positionY="117" width="128" height="89"/>
+        <element name="Conference" positionX="0" positionY="99" width="128" height="119"/>
+        <element name="Journal" positionX="-9" positionY="90" width="128" height="74"/>
+        <element name="Paper" positionX="-255.8818359375" positionY="296.5560302734375" width="128" height="149"/>
+        <element name="Post" positionX="18" positionY="126" width="128" height="119"/>
+        <element name="SocialAccount" positionX="-18" positionY="81" width="128" height="74"/>
+    </elements>
+</model>
